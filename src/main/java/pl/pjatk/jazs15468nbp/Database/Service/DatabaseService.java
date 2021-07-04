@@ -5,7 +5,6 @@ import pl.pjatk.jazs15468nbp.Database.Model.GoldInfo;
 import pl.pjatk.jazs15468nbp.Database.Repository.DatabaseRepository;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Service
 public class DatabaseService

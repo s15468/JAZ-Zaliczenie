@@ -1,7 +1,5 @@
 package pl.pjatk.jazs15468nbp.NBP.Service;
 
-import org.apache.tomcat.jni.Local;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import pl.pjatk.jazs15468nbp.Database.Enums.MineralType;
 import pl.pjatk.jazs15468nbp.Database.Model.GoldInfo;
@@ -25,7 +23,7 @@ public class NbpService
         this.restTemplateConfig = restTemplateConfig;
     }
 
-    public void SetAverageCurrencyValue(LocalDate startDate, LocalDate endDate)
+    public double SetAverageCurrencyValue(LocalDate startDate, LocalDate endDate)
     {
         String customUrl = url + startDate.toString() + "/" + endDate.toString() + "/?format=json";
 
@@ -38,7 +36,7 @@ public class NbpService
             value += gold[i].Cena;
         }
 
-        value = value / (gold.length - 1);
+        value = value / (gold.length);
 
         var goldInfo = new GoldInfo();
         goldInfo.setStartdate(startDate);
@@ -48,5 +46,7 @@ public class NbpService
         goldInfo.setMineralvalue(value);
 
         databaseService.AddGoldInfo(goldInfo);
+
+        return goldInfo.getMineralvalue();
     }
 }
